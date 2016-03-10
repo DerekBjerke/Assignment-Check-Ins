@@ -1,0 +1,44 @@
+Game.cpp Tests
+=================
+o struct BOMB
+	- Instantiate a BOMB struct and analyze the x and y values. If both are NULL, the BOMB instantiated properly.
+
+o BOMB::reset()
+	- Instantiate multiple BOMB structs, call BOMB.reset(), then check that the y values are set to 0.
+	  Then compare the x values for differences over several more calls to BOMB.reset() to ensure the 
+	  values truly vary, even if they may be the same for an iteration or so.
+
+o struct BUCKET
+	- Instantiate a BUCKET struct and analyze the x and y values. If both are NULL, the BUCKET instantiated properly.
+
+o Game_Init(HWND window)
+	- Upon calling, attempt to access the D3D interface that is created during Direct3D_Init. If d3d is NULL it has
+	  already failed. If it is verified to be initialized, check then that the device is not NULL as well. If both variables
+	  are initialized, the method succeeded.
+
+	- Upon calling, verify that the BALL surface and BUCKET surface are properly loaded by verifying they are not NULL.
+	  If an image is loaded, this portion of Game_Init succeeded.
+
+	- For initialization of the bombs array, analyze each element to see that the values of the bomb are not NULL, then
+	  apply the test from BOMB::reset() iteratively.
+	  
+o Game_Run(HWND window)
+	- Concerning the differing drop speeds of the bombs, track their value over multiple iterations and divide
+	  their current y value by the current iteration. The result should match the bombs given speed.
+
+	- Using the given Screen Dimensions check that, if the y value of any bomb surpasses the screen height, that
+	  the gameover boolean is set to true by the next iteration, otherwise the state has gone bad.
+
+	- IF a controller is plugged in, the mouse and keyboard bucket controls should be disabled for the duration
+	  of connection. If it is not plugged in, the mouse and keyboard should be re-enabled.
+
+	- Using the speed values for the bucket, ensure that the bucket never leaves the width bounds of the screen.
+	  If the bucket's x value is less than or greater than the width of the screen, the application is in a fail state.
+
+	- Each bomb is iteratively checked for intersection with the bucket. If any bomb collides with the bounds of the bucket
+	  without being reset and a point added to the player score, the application is in a fail state.
+
+	- For each bomb and bucket instantiated, a surface should be drawn for each using the coordinate data held by their respective structs.
+
+o Game_End()
+	- For each object that is being released, follow up and ensure that they have control removed.
